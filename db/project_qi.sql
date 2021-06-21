@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 14 Mar 2021 pada 14.24
--- Versi server: 5.7.24
--- Versi PHP: 7.4.12
+-- Generation Time: Jun 21, 2021 at 10:09 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `atm`
+-- Table structure for table `atm`
 --
 
 CREATE TABLE `atm` (
@@ -36,7 +36,7 @@ CREATE TABLE `atm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `atm`
+-- Dumping data for table `atm`
 --
 
 INSERT INTO `atm` (`id_atm`, `nama_atm`, `nama_pj`, `alamat_atm`, `file`) VALUES
@@ -59,7 +59,7 @@ INSERT INTO `atm` (`id_atm`, `nama_atm`, `nama_pj`, `alamat_atm`, `file`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_keluar`
+-- Table structure for table `barang_keluar`
 --
 
 CREATE TABLE `barang_keluar` (
@@ -71,7 +71,7 @@ CREATE TABLE `barang_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang_keluar`
+-- Dumping data for table `barang_keluar`
 --
 
 INSERT INTO `barang_keluar` (`id_bk`, `nama_barang`, `id_proyek`, `jumlah`, `tgl_keluar`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `barang_keluar` (`id_bk`, `nama_barang`, `id_proyek`, `jumlah`, `tgl
 (6, 'Shutter Lite DC Motor Assy PC280N FL', 6, '1', '2021-03-15');
 
 --
--- Trigger `barang_keluar`
+-- Triggers `barang_keluar`
 --
 DELIMITER $$
 CREATE TRIGGER `bk_delete` AFTER DELETE ON `barang_keluar` FOR EACH ROW BEGIN 
@@ -116,7 +116,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang_masuk`
+-- Table structure for table `barang_masuk`
 --
 
 CREATE TABLE `barang_masuk` (
@@ -129,7 +129,7 @@ CREATE TABLE `barang_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang_masuk`
+-- Dumping data for table `barang_masuk`
 --
 
 INSERT INTO `barang_masuk` (`id_bm`, `nama_barang`, `id_jenis`, `id_satuan`, `jumlah`, `tgl_masuk`) VALUES
@@ -141,7 +141,7 @@ INSERT INTO `barang_masuk` (`id_bm`, `nama_barang`, `id_jenis`, `id_satuan`, `ju
 (6, 'TRANSPORT CMD-V4 HORIZONTAL FL 101MM', 1, 1, '5', '2021-03-01');
 
 --
--- Trigger `barang_masuk`
+-- Triggers `barang_masuk`
 --
 DELIMITER $$
 CREATE TRIGGER `bm_delete` AFTER DELETE ON `barang_masuk` FOR EACH ROW BEGIN 
@@ -182,7 +182,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis`
+-- Table structure for table `jenis`
 --
 
 CREATE TABLE `jenis` (
@@ -191,7 +191,7 @@ CREATE TABLE `jenis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `jenis`
+-- Dumping data for table `jenis`
 --
 
 INSERT INTO `jenis` (`id_jenis`, `jenis`) VALUES
@@ -201,7 +201,7 @@ INSERT INTO `jenis` (`id_jenis`, `jenis`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `proyek`
+-- Table structure for table `proyek`
 --
 
 CREATE TABLE `proyek` (
@@ -220,7 +220,7 @@ CREATE TABLE `proyek` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `proyek`
+-- Dumping data for table `proyek`
 --
 
 INSERT INTO `proyek` (`id_proyek`, `kode_proyek`, `nama_proyek`, `id_atm`, `alamat_proyek`, `estimasi`, `status_proyek`, `status_jalan`, `ket_tunda`, `tgl_mulai`, `tgl_selesai`, `biaya`) VALUES
@@ -243,7 +243,7 @@ INSERT INTO `proyek` (`id_proyek`, `kode_proyek`, `nama_proyek`, `id_atm`, `alam
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `satuan`
+-- Table structure for table `satuan`
 --
 
 CREATE TABLE `satuan` (
@@ -252,7 +252,7 @@ CREATE TABLE `satuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `satuan`
+-- Dumping data for table `satuan`
 --
 
 INSERT INTO `satuan` (`id_satuan`, `satuan`) VALUES
@@ -262,7 +262,7 @@ INSERT INTO `satuan` (`id_satuan`, `satuan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `stok`
+-- Table structure for table `stok`
 --
 
 CREATE TABLE `stok` (
@@ -273,7 +273,7 @@ CREATE TABLE `stok` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `stok`
+-- Dumping data for table `stok`
 --
 
 INSERT INTO `stok` (`nama_barang`, `id_jenis`, `id_satuan`, `stok`) VALUES
@@ -287,7 +287,7 @@ INSERT INTO `stok` (`nama_barang`, `id_jenis`, `id_satuan`, `stok`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -298,33 +298,32 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Super Admin'),
-(2, 'kepala', '870f669e4bbbfa8a6fde65549826d1c4', 'Kepala'),
-(3, 'user', 'ee11cbb19052e40b07aac0ca060c23ee', 'User');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator'),
+(2, 'teknisi', 'e21394aaeee10f917f581054d24b031f', 'Teknisi');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `atm`
+-- Indexes for table `atm`
 --
 ALTER TABLE `atm`
   ADD PRIMARY KEY (`id_atm`);
 
 --
--- Indeks untuk tabel `barang_keluar`
+-- Indexes for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`id_bk`),
   ADD KEY `nama_barang` (`nama_barang`);
 
 --
--- Indeks untuk tabel `barang_masuk`
+-- Indexes for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`id_bm`),
@@ -332,26 +331,26 @@ ALTER TABLE `barang_masuk`
   ADD KEY `id_satuan` (`id_satuan`);
 
 --
--- Indeks untuk tabel `jenis`
+-- Indexes for table `jenis`
 --
 ALTER TABLE `jenis`
   ADD PRIMARY KEY (`id_jenis`);
 
 --
--- Indeks untuk tabel `proyek`
+-- Indexes for table `proyek`
 --
 ALTER TABLE `proyek`
   ADD PRIMARY KEY (`id_proyek`),
   ADD KEY `id_perusahaan` (`id_atm`);
 
 --
--- Indeks untuk tabel `satuan`
+-- Indexes for table `satuan`
 --
 ALTER TABLE `satuan`
   ADD PRIMARY KEY (`id_satuan`);
 
 --
--- Indeks untuk tabel `stok`
+-- Indexes for table `stok`
 --
 ALTER TABLE `stok`
   ADD PRIMARY KEY (`nama_barang`),
@@ -359,53 +358,53 @@ ALTER TABLE `stok`
   ADD KEY `id_satuan` (`id_satuan`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `atm`
+-- AUTO_INCREMENT for table `atm`
 --
 ALTER TABLE `atm`
   MODIFY `id_atm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `barang_keluar`
+-- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
   MODIFY `id_bk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `barang_masuk`
+-- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   MODIFY `id_bm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis`
+-- AUTO_INCREMENT for table `jenis`
 --
 ALTER TABLE `jenis`
   MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `proyek`
+-- AUTO_INCREMENT for table `proyek`
 --
 ALTER TABLE `proyek`
   MODIFY `id_proyek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `satuan`
+-- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
   MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

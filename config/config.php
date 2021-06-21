@@ -1,6 +1,6 @@
 <?php 
 	function base_url($url = null){
-		$base_url = "http://localhost/warehouse_qualita";
+		$base_url = "http://localhost/qualita-indonesia";
 		if ($url != null) {
 			return $base_url."/".$url;
 		}else{
