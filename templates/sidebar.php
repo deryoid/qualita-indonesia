@@ -56,9 +56,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="<?= base_url('admin/barang') ?>" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
-                  <p>data master</p>
+                  <p>Barang</p>
                 </a>
               </li>
               <li class="nav-item">
