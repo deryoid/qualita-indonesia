@@ -106,6 +106,7 @@ WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
                             </ul>
                 </tbody>
                 </p>
+                
             </div>
             <!-- /.card -->
 
