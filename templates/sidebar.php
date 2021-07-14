@@ -61,13 +61,25 @@
                   <p>Barang</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-circle nav-icon"></i>
-                  <p>data master</p>
-                </a>
-              </li>
             </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?= base_url('admin/sektoratm') ?>" class="nav-link">
+              <i class="nav-icon fas fa-hdd"></i>
+              <p>
+                Sektor ATM
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?= base_url('admin/perbaikan') ?>" class="nav-link">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Perbaikan
+              </p>
+            </a>
           </li>
 
 
@@ -89,6 +101,22 @@
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Home
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('teknisi/lokasiatm') ?>" class="nav-link">
+              <i class="nav-icon fas fa-map"></i>
+              <p>
+               List Lokasi ATM
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('teknisi/perbaikan') ?>" class="nav-link">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Update Status Perbaikan
               </p>
             </a>
           </li>

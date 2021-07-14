@@ -30,12 +30,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Barang</h1>
+                            <h1 class="m-0 text-dark">Perbaikan ATM</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Data Master</a></li>
-                                <li class="breadcrumb-item active">Barang</li>
+                                <!-- <li class="breadcrumb-item"><a href="#">Data Master</a></li> -->
+                                <li class="breadcrumb-item active">Perbaikan ATM</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -71,28 +71,43 @@ include '../../templates/head.php';
                                             <thead class="bg-blue">
                                                 <tr align="center">
                                                     <th>No</th>
-                                                    <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Tahun Produksi</th>
-                                                    <th>Lokasi Produksi</th>
+                                                    <th>Sektor ATM</th>
+                                                    <th>Lokasi ATM</th>
+                                                    <th>Tanggal Perbaikan</th>
+                                                    <th>Status Perbaikan</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             $no = 1;
-                                            $data = $koneksi->query("SELECT * FROM barang ORDER BY kode_barang DESC");
+                                            $data = $koneksi->query("SELECT * FROM perbaikan AS p 
+                                            LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
+                                            LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+                                            WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
                                                     <tr>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><?= $row['kode_barang'] ?></td>
-                                                        <td><?= $row['nama_barang'] ?></td>
-                                                        <td><?= $row['tahun_produksi'] ?></td>
-                                                        <td><?= $row['lokasi_produksi'] ?></td>
+                                                        <td>
+                                                            <ul>
+                                                            <li>Kode ATM : <?= $row['kode_barang'] ?></li>
+                                                            <li>Nama ATM : <?= $row['nama_barang'] ?></li>
+                                                            <li>Tanggal Peletakan : <?= $row['tgl_peletakan'] ?></li>
+                                                            <li>Status Engine : <?= $row['status'] ?></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td>
+                                                            <ul>
+                                                            <li><?= $row['lokasi_atm'] ?></li>
+                                                            <li><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><?= $row['tanggal_perbaikan'] ?></td>
+                                                        <td><?= $row['status_perbaikan'] ?></td>
                                                         <td align="center">
-                                                            <a href="edit?id=<?= $row['kode_barang'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                            <a href="hapus?id=<?= $row['kode_barang'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                            <a href="edit?id=<?= $row['id_perbaikan'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                            <!-- <a href="hapus?id=<?= $row['id_perbaikan'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>
