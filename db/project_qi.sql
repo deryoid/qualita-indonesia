@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 14, 2021 at 03:19 AM
--- Server version: 5.7.24
--- PHP Version: 7.4.12
+-- Waktu pembuatan: 15 Agu 2021 pada 15.13
+-- Versi server: 5.7.24
+-- Versi PHP: 7.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -35,7 +35,7 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data untuk tabel `barang`
 --
 
 INSERT INTO `barang` (`kode_barang`, `nama_barang`, `tahun_produksi`, `lokasi_produksi`) VALUES
@@ -45,7 +45,29 @@ INSERT INTO `barang` (`kode_barang`, `nama_barang`, `tahun_produksi`, `lokasi_pr
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perbaikan`
+-- Struktur dari tabel `maintance`
+--
+
+CREATE TABLE `maintance` (
+  `id_maintance` int(11) NOT NULL,
+  `id_sektoratm` int(11) NOT NULL,
+  `status_maintance` varchar(75) NOT NULL,
+  `id_petugas` int(11) DEFAULT NULL,
+  `tgl_maintance` varchar(150) DEFAULT NULL,
+  `keterangan` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `maintance`
+--
+
+INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id_petugas`, `tgl_maintance`, `keterangan`) VALUES
+(5, 4, 'Maintance', 1, '2021-08-15', 'Pemeliharaan');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `perbaikan`
 --
 
 CREATE TABLE `perbaikan` (
@@ -57,7 +79,7 @@ CREATE TABLE `perbaikan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `perbaikan`
+-- Dumping data untuk tabel `perbaikan`
 --
 
 INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `tanggal_perbaikan`, `tanggal_selesai`, `status_perbaikan`) VALUES
@@ -67,7 +89,26 @@ INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `tanggal_perbaikan`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sektor_atm`
+-- Struktur dari tabel `petugas`
+--
+
+CREATE TABLE `petugas` (
+  `id_petugas` int(11) NOT NULL,
+  `nama_petugas` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `petugas`
+--
+
+INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `email`) VALUES
+(1, 'Abd. Malik', 'dery.fk.ulm@gmail.com\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sektor_atm`
 --
 
 CREATE TABLE `sektor_atm` (
@@ -80,7 +121,7 @@ CREATE TABLE `sektor_atm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `sektor_atm`
+-- Dumping data untuk tabel `sektor_atm`
 --
 
 INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `lokasi_atm`, `link_gmap`, `tgl_peletakan`, `status`) VALUES
@@ -90,7 +131,7 @@ INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `lokasi_atm`, `link_gma
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -101,7 +142,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
@@ -113,20 +154,35 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
 --
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`kode_barang`);
 
 --
--- Indexes for table `perbaikan`
+-- Indeks untuk tabel `maintance`
+--
+ALTER TABLE `maintance`
+  ADD PRIMARY KEY (`id_maintance`),
+  ADD KEY `kode_barang` (`id_sektoratm`),
+  ADD KEY `kode_barang_2` (`id_sektoratm`),
+  ADD KEY `id_petugas` (`id_petugas`);
+
+--
+-- Indeks untuk tabel `perbaikan`
 --
 ALTER TABLE `perbaikan`
   ADD PRIMARY KEY (`id_perbaikan`),
   ADD KEY `id_sektoratm` (`id_sektoratm`);
 
 --
--- Indexes for table `sektor_atm`
+-- Indeks untuk tabel `petugas`
+--
+ALTER TABLE `petugas`
+  ADD PRIMARY KEY (`id_petugas`);
+
+--
+-- Indeks untuk tabel `sektor_atm`
 --
 ALTER TABLE `sektor_atm`
   ADD PRIMARY KEY (`id_sektoratm`),
@@ -134,29 +190,41 @@ ALTER TABLE `sektor_atm`
   ADD KEY `kode_barang_2` (`kode_barang`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `perbaikan`
+-- AUTO_INCREMENT untuk tabel `maintance`
+--
+ALTER TABLE `maintance`
+  MODIFY `id_maintance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `perbaikan`
 --
 ALTER TABLE `perbaikan`
   MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `sektor_atm`
+-- AUTO_INCREMENT untuk tabel `petugas`
+--
+ALTER TABLE `petugas`
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `sektor_atm`
 --
 ALTER TABLE `sektor_atm`
   MODIFY `id_sektoratm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;

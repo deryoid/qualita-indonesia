@@ -81,6 +81,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="<?= base_url('admin/maintance') ?>" class="nav-link">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Maintance
+              </p>
+            </a>
+          </li>
 
 
         </ul>
