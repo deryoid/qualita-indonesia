@@ -50,7 +50,7 @@ include '../../templates/head.php';
                         <div class="col-12">
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
-                                    <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
+                                    <!-- <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a> -->
                                     <!-- <a href="print" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a> -->
                                 </div>
                                 <!-- /.card-header -->
@@ -74,6 +74,9 @@ include '../../templates/head.php';
                                                     <th>Sektor ATM</th>
                                                     <th>Lokasi ATM</th>
                                                     <th>Tanggal Perbaikan</th>
+                                                    <th>Foto Sebelum Perbaikan</th>
+                                                    <th>Tanggal Selesai</th>
+                                                    <th>Foto Setelah Perbaikan</th>
                                                     <th>Status Perbaikan</th>
                                                     <th>Opsi</th>
                                                 </tr>
@@ -91,19 +94,25 @@ include '../../templates/head.php';
                                                         <td align="center"><?= $no++ ?></td>
                                                         <td>
                                                             <ul>
-                                                            <li>Kode ATM : <?= $row['kode_barang'] ?></li>
-                                                            <li>Nama ATM : <?= $row['nama_barang'] ?></li>
-                                                            <li>Tanggal Peletakan : <?= $row['tgl_peletakan'] ?></li>
-                                                            <li>Status Engine : <?= $row['status'] ?></li>
+                                                            <li>Kode ATM : <b><?= $row['kode_barang'] ?></b></li>
+                                                            <li>ATM : <b><?= $row['bank'] ?></b></li>
+                                                            <li>Nama ATM : <b><?= $row['nama_barang'] ?></b></li>
+                                                            <li>Tanggal Peletakan : <b><?= $row['tgl_peletakan'] ?></b></li>
+                                                            <li>Status Engine : <b><?= $row['status'] ?></b></li>
                                                             </ul>
                                                         </td>
+
                                                         <td>
                                                             <ul>
                                                             <li><?= $row['lokasi_atm'] ?></li>
+                                                            <li>Kecamatan : <b><?= $row['kecamatan'] ?></b></li>
                                                             <li><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></li>
                                                             </ul>
                                                         </td>
                                                         <td><?= $row['tanggal_perbaikan'] ?></td>
+                                                        <td><a href="<?= base_url() ?>/filependukung/<?= $row['foto_sebelum'] ?>" data-toggle="lightbox" data-title="Foto Sebelum Perbaikan"><i class="fa fa-images"></i> Foto Sebelum</a></td>
+                                                        <td><?= $row['tanggal_selesai'] ?></td>
+                                                        <td><a href="<?= base_url() ?>/filependukung/<?= $row['foto_sesudah'] ?>" data-toggle="lightbox" data-title="Foto Sebelum Perbaikan"><i class="fa fa-images"></i> Foto Sesudah</a></td>
                                                         <td><?= $row['status_perbaikan'] ?></td>
                                                         <td align="center">
                                                             <a href="edit?id=<?= $row['id_perbaikan'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>

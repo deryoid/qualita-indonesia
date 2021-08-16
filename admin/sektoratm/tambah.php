@@ -78,6 +78,18 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Bank</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="bank">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Kecamatan</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="kecamatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Lokasi ATM</label>
                                             <div class="col-sm-10">
                                                 <textarea type="text" class="form-control" name="lokasi_atm"></textarea>
@@ -136,6 +148,8 @@ include '../../templates/head.php';
     <?php
     if (isset($_POST['submit'])) {
         $kode_barang        = $_POST['kode_barang'];
+        $bank               = $_POST['bank'];
+        $kecamatan          = $_POST['kecamatan'];
         $lokasi_atm         = $_POST['lokasi_atm'];
         $link_gmap          = $_POST['link_gmap'];
         $tgl_peletakan      = $_POST['tgl_peletakan'];
@@ -145,6 +159,8 @@ include '../../templates/head.php';
         $submit = $koneksi->query("INSERT INTO sektor_atm VALUES (
             NULL,
             '$kode_barang',
+            '$bank',
+            '$kecamatan',
             '$lokasi_atm',
             '$link_gmap',
             '$tgl_peletakan',

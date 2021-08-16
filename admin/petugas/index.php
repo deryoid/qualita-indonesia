@@ -30,12 +30,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Sektor ATM</h1>
+                            <h1 class="m-0 text-dark">Petugas</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <!-- <li class="breadcrumb-item"><a href="#">Data Master</a></li> -->
-                                <li class="breadcrumb-item active">Sektor ATM</li>
+                                <li class="breadcrumb-item"><a href="#">Data Master</a></li>
+                                <li class="breadcrumb-item active">Petugas</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -71,36 +71,24 @@ include '../../templates/head.php';
                                             <thead class="bg-blue">
                                                 <tr align="center">
                                                     <th>No</th>
-                                                    <th>Kode Barang</th>
-                                                    <th>Bank</th>
-                                                    <th>Kecamatan</th>
-                                                    <th>Lokasi ATM</th>
-                                                    <th>Link Gmaps</th>
-                                                    <th>Tanggal Peletakan</th>
-                                                    <th>Status</th>
+                                                    <th>Petugas </th>
+                                                    <th>E-mail</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             $no = 1;
-                                            $data = $koneksi->query("SELECT * FROM sektor_atm AS sa 
-                                            LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
-                                            ORDER BY sa.id_sektoratm DESC");
+                                            $data = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
                                                     <tr>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><?= $row['kode_barang'] ?></td>
-                                                        <td><?= $row['bank'] ?></td>
-                                                        <td><?= $row['kecamatan'] ?></td>
-                                                        <td><?= $row['lokasi_atm'] ?></td>
-                                                        <td align="center"><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></td>
-                                                        <td><?= $row['tgl_peletakan'] ?></td>
-                                                        <td><?= $row['status'] ?></td>
+                                                        <td><?= $row['nama_petugas'] ?></td>
+                                                        <td><?= $row['email'] ?></td>
                                                         <td align="center">
-                                                            <a href="edit?id=<?= $row['id_sektoratm'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
-                                                            <a href="hapus?id=<?= $row['id_sektoratm'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                            <a href="edit?id=<?= $row['id_petugas'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                            <a href="hapus?id=<?= $row['id_petugas'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

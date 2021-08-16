@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 15 Agu 2021 pada 15.13
+-- Waktu pembuatan: 16 Agu 2021 pada 14.04
 -- Versi server: 5.7.24
 -- Versi PHP: 7.4.12
 
@@ -62,7 +62,8 @@ CREATE TABLE `maintance` (
 --
 
 INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id_petugas`, `tgl_maintance`, `keterangan`) VALUES
-(5, 4, 'Maintance', 1, '2021-08-15', 'Pemeliharaan');
+(5, 4, 'Maintance', 1, '2021-08-15', 'Pemeliharaan'),
+(6, 3, 'Pemeliharaan', 1, '2021-08-25', 'Maintance');
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,9 @@ CREATE TABLE `perbaikan` (
   `id_perbaikan` int(11) NOT NULL,
   `id_sektoratm` int(11) DEFAULT NULL,
   `tanggal_perbaikan` date DEFAULT NULL,
+  `foto_sebelum` varchar(255) DEFAULT NULL,
   `tanggal_selesai` date DEFAULT NULL,
+  `foto_sesudah` varchar(255) DEFAULT NULL,
   `status_perbaikan` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -82,9 +85,9 @@ CREATE TABLE `perbaikan` (
 -- Dumping data untuk tabel `perbaikan`
 --
 
-INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `tanggal_perbaikan`, `tanggal_selesai`, `status_perbaikan`) VALUES
-(1, 3, '2021-07-14', '2021-07-15', 'Perbaikan Selesai'),
-(2, 4, '2021-07-16', '2021-07-16', 'Perbaikan Selesai');
+INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `tanggal_perbaikan`, `foto_sebelum`, `tanggal_selesai`, `foto_sesudah`, `status_perbaikan`) VALUES
+(1, 3, '2021-07-14', '', '2021-07-15', '', 'Perbaikan Selesai'),
+(2, 4, '2021-07-16', '87993.jpg', '2021-07-16', '32277.jpg', 'Sedang Diperbaiki');
 
 -- --------------------------------------------------------
 
@@ -114,6 +117,8 @@ INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `email`) VALUES
 CREATE TABLE `sektor_atm` (
   `id_sektoratm` int(11) NOT NULL,
   `kode_barang` varchar(35) NOT NULL,
+  `bank` varchar(150) NOT NULL,
+  `kecamatan` varchar(40) NOT NULL,
   `lokasi_atm` varchar(255) NOT NULL,
   `link_gmap` text NOT NULL,
   `tgl_peletakan` varchar(25) NOT NULL,
@@ -124,9 +129,9 @@ CREATE TABLE `sektor_atm` (
 -- Dumping data untuk tabel `sektor_atm`
 --
 
-INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `lokasi_atm`, `link_gmap`, `tgl_peletakan`, `status`) VALUES
-(3, 'CVX15466237IIL2', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Tidak Aktif'),
-(4, 'CVX15466332XY1', 'Banjarmasin', 'https://goo.gl/maps/iwcS2uEnibTPWFhQ8', '2021-07-15', 'Tidak Aktif');
+INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `bank`, `kecamatan`, `lokasi_atm`, `link_gmap`, `tgl_peletakan`, `status`) VALUES
+(3, 'CVX15466237IIL2', 'BRI', 'Banjarmasin Tengah', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Aktif'),
+(4, 'CVX15466237IIL2', 'BNI', 'Banjarmasin Tengah', 'Jl. Mayjen Sutoyo S No.Rt 18, Tlk. Dalam, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70117', 'https://goo.gl/maps/iwcS2uEnibTPWFhQ8', '2021-07-15', 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -203,7 +208,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `maintance`
 --
 ALTER TABLE `maintance`
-  MODIFY `id_maintance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_maintance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `perbaikan`
@@ -215,7 +220,7 @@ ALTER TABLE `perbaikan`
 -- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_atm`

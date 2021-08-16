@@ -172,7 +172,7 @@ include '../../templates/head.php';
         if ($submit) {
 
             $_SESSION['pesan'] = "Data Maintance Ditambahkan";
-            echo "<script>window.location.replace('../maintace/');</script>";
+            echo "<script>window.location.replace('../maintance/');</script>";
         }
     }
     ?>

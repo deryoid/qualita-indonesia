@@ -62,6 +62,14 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('admin/petugas') ?>" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>Petugas</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item">
@@ -83,7 +91,7 @@
           </li>
           <li class="nav-item">
             <a href="<?= base_url('admin/maintance') ?>" class="nav-link">
-              <i class="nav-icon fas fa-tools"></i>
+              <i class="nav-icon fas fa-toolbox"></i>
               <p>
                 Maintance
               </p>
