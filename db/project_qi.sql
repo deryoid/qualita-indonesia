@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 16 Agu 2021 pada 14.04
+-- Waktu pembuatan: 17 Agu 2021 pada 07.37
 -- Versi server: 5.7.24
 -- Versi PHP: 7.4.12
 
@@ -74,6 +74,7 @@ INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id
 CREATE TABLE `perbaikan` (
   `id_perbaikan` int(11) NOT NULL,
   `id_sektoratm` int(11) DEFAULT NULL,
+  `id_petugas` int(11) NOT NULL,
   `tanggal_perbaikan` date DEFAULT NULL,
   `foto_sebelum` varchar(255) DEFAULT NULL,
   `tanggal_selesai` date DEFAULT NULL,
@@ -85,9 +86,8 @@ CREATE TABLE `perbaikan` (
 -- Dumping data untuk tabel `perbaikan`
 --
 
-INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `tanggal_perbaikan`, `foto_sebelum`, `tanggal_selesai`, `foto_sesudah`, `status_perbaikan`) VALUES
-(1, 3, '2021-07-14', '', '2021-07-15', '', 'Perbaikan Selesai'),
-(2, 4, '2021-07-16', '87993.jpg', '2021-07-16', '32277.jpg', 'Sedang Diperbaiki');
+INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `id_petugas`, `tanggal_perbaikan`, `foto_sebelum`, `tanggal_selesai`, `foto_sesudah`, `status_perbaikan`) VALUES
+(4, 3, 1, '2021-08-17', '16105.png', '2021-08-17', '39626.png', 'Perbaikan Selesai');
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,7 @@ CREATE TABLE `sektor_atm` (
 --
 
 INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `bank`, `kecamatan`, `lokasi_atm`, `link_gmap`, `tgl_peletakan`, `status`) VALUES
-(3, 'CVX15466237IIL2', 'BRI', 'Banjarmasin Tengah', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Aktif'),
+(3, 'CVX15466237IIL2', 'BRI', 'Banjarmasin Tengah', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Tidak Aktif'),
 (4, 'CVX15466237IIL2', 'BNI', 'Banjarmasin Tengah', 'Jl. Mayjen Sutoyo S No.Rt 18, Tlk. Dalam, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70117', 'https://goo.gl/maps/iwcS2uEnibTPWFhQ8', '2021-07-15', 'Tidak Aktif');
 
 -- --------------------------------------------------------
@@ -178,7 +178,8 @@ ALTER TABLE `maintance`
 --
 ALTER TABLE `perbaikan`
   ADD PRIMARY KEY (`id_perbaikan`),
-  ADD KEY `id_sektoratm` (`id_sektoratm`);
+  ADD KEY `id_sektoratm` (`id_sektoratm`),
+  ADD KEY `id_petugas` (`id_petugas`);
 
 --
 -- Indeks untuk tabel `petugas`
@@ -214,13 +215,13 @@ ALTER TABLE `maintance`
 -- AUTO_INCREMENT untuk tabel `perbaikan`
 --
 ALTER TABLE `perbaikan`
-  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_atm`

@@ -4,7 +4,6 @@
 
     $no = 1;
 
-    $kecamatan   = $_POST['kecamatan'];
 
   $bln = array(
           '01' => 'Januari',
@@ -37,7 +36,6 @@
     
     <h3><center><br>
       LAPORAN DATA SEKTOR ATM<br> 
-      Di Kecamatan : <?= $kecamatan;?><br> 
     </center></h3><br><br>
                   <div class="row">
                     <div class="col-sm-12">
@@ -58,8 +56,7 @@
                                             <?php
                                             $no = 1;
                                             $data = $koneksi->query("SELECT * FROM sektor_atm AS sa 
-                                            LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
-                                            WHERE kecamatan = '$kecamatan'");
+                                            LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">

@@ -92,7 +92,7 @@ include '../../templates/head.php';
                                                     $sd = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
                                                     foreach ($sd as $item) {
                                                     ?>
-                                                        <option value="<?= $item['id_petugas'] ?>"><?= $item['id_petugas'] ?><?= $item['nama_petugas'] ?></option>
+                                                        <option value="<?= $item['id_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
                                                         
                                                     <?php } ?>
                                                 </select>

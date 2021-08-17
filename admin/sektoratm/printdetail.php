@@ -3,7 +3,8 @@ include '../../config/config.php';
 include '../../config/koneksi.php';
 
 $id   = $_GET['id'];
-$data = $koneksi->query("SELECT * FROM perusahaan WHERE id_perusahaan = '$id'");
+$data = $koneksi->query("SELECT * FROM sektor_atm AS sa 
+LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang WHERE sa.id_sektoratm = '$id'");
 $row  = $data->fetch_array();
 
 $bln = array(
@@ -30,21 +31,15 @@ $bln = array(
 <html>
 
 <head>
-    <title>ReportL</title>
+    <title>Detail Sektor ATM</title>
 </head>
 
 <body>
-<img src="<?=base_url('assets/dist/img/logo_pln.jpg')?>" align="left" width="90" height="90">
-  <p align="center"><b>
-    <font size="7">PT. GERAI INDAH MARABAHAN</font> <br> <br> <br> <br>
-    <hr size="2px" color="black">
-    <center><font size="2">Alamat : Jl. AES Nasution, Marabahan Kota, Marabahan Kabupaten Barito Kuala Kalimantan Selatan </font></center>
-    <hr size="2px" color="black">
-  </b></p>
+
     <!-- Kop Here ! -->
     <h3>
         <center><br>
-            Data Perusahaan<br>
+            Data Detail Sektor ATM<br>
         </center>
     </h3><br><br>
     <div class="row">
@@ -56,45 +51,45 @@ $bln = array(
                             <b>
                                 <tr>
                                     <p>
-                                        <th width="40%">Nama Perusahaan </th>
-                                        <th><?php echo $row['nama_perusahaan'] ?></th>
+                                        <th width="40%">Kode Barang </th>
+                                        <th><?php echo $row['kode_barang'] ?></th>
                                     </p>
                                 </tr>
 
                                 <tr>
                                     <p>
-                                        <th>Bidang Perusahaan </th>
-                                        <th><?php echo $row['bidang_perusahaan'] ?></th>
+                                        <th>Bank</th>
+                                        <th><?php echo $row['bank'] ?></th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
-                                        <th>Alamat</th>
-                                        <th><?php echo $row['alamat_perusahaan'] ?></th>
+                                        <th>Kecamatan</th>
+                                        <th><?php echo $row['kecamatan'] ?></th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
-                                        <th>Tahun Berdiri </th>
-                                        <th><?php echo $row['tahun_berdiri'] ?></th>
+                                        <th>Lokasi ATM</th>
+                                        <th><?php echo $row['lokasi_atm'] ?></th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
-                                        <th>Pimpinan/Kepala </th>
-                                        <th><?php echo $row['nama_pimpinan'] ?></th>
+                                        <th>Link Gmaps</th>
+                                        <th><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
-                                        <th>No. Telp Perusahaan </th>
-                                        <th><?php echo $row['no_telp'] ?></th>
+                                        <th>Tanggal Peletakan</th>
+                                        <th><?php echo $row['tanggal_peletakan'] ?></th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
-                                        <th>Email Perusahaan </th>
-                                        <th><?php echo $row['email'] ?></th>
+                                        <th>Status </th>
+                                        <th><?php echo $row['status'] ?></th>
                                     </p>
                                 </tr>
 

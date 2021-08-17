@@ -51,7 +51,8 @@ include '../../templates/head.php';
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
-                                    <!-- <a href="print" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a> -->
+                                    <a href="print" target="blank" class="btn bg-info"><i class="fa fa-print"> Cetak</i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_print" class="btn bg-info"><i class="fa fa-print"> Cetak Per/Petugas</i></a>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -72,6 +73,7 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th>No</th>
                                                     <th>Sektor ATM</th>
+                                                    <th>Petugas</th>
                                                     <th>Lokasi ATM</th>
                                                     <th>Tanggal Perbaikan</th>
                                                     <th>Status Perbaikan</th>
@@ -83,6 +85,7 @@ include '../../templates/head.php';
                                             $data = $koneksi->query("SELECT * FROM perbaikan AS p 
                                             LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+                                            LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
                                             WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
@@ -97,6 +100,7 @@ include '../../templates/head.php';
                                                             <li>Status Engine : <?= $row['status'] ?></li>
                                                             </ul>
                                                         </td>
+                                                        <td><?= $row['nama_petugas'] ?></td>
                                                         <td>
                                                             <ul>
                                                             <li><?= $row['lokasi_atm'] ?></li>
@@ -106,6 +110,7 @@ include '../../templates/head.php';
                                                         <td><?= $row['tanggal_perbaikan'] ?></td>
                                                         <td><?= $row['status_perbaikan'] ?></td>
                                                         <td align="center">
+                                                            <a href="printdetail?id=<?= $row['id_perbaikan'] ?>" target="blank" class="btn btn-info btn-sm" title="detail"><i class="fa fa-print"></i></a>
                                                             <a href="edit?id=<?= $row['id_perbaikan'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                             <a href="hapus?id=<?= $row['id_perbaikan'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
                                                         </td>
@@ -154,3 +159,54 @@ include '../../templates/head.php';
 </body>
 
 </html>
+
+
+ <!-- MODAL Print -->
+ <div id="modal_print" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cetak</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+    <!-- Start content -->
+        <div class="content">
+            <div class="container"> 
+                <div class="row">
+                     <div class="col-sm-12">
+                          <div class="card-box">
+                                <form class="form-horizontal" action="printperbaikan" method="POST" target="blank">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 control-label">Pilih Petugas </label>
+                                            <div class="col-sm-12">
+                                            <select class="form control select2" name="nama_petugas" data-placeholder="Pilih" style="width: 100%;" required>
+                                                    <option value=""></option>
+                                                    <?php
+                                                    $sd = $koneksi->query("SELECT nama_petugas FROM perbaikan AS p
+                                                    LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
+                                                    
+                                                    GROUP BY nama_petugas");
+                                                    foreach ($sd as $item) {
+                                                    ?>
+                                                        <option value="<?= $item['nama_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
+                                                        
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <input type="submit" name="print" class="btn btn-success" value="Print">
+
+                                </form>
+                                       
+                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

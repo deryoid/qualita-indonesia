@@ -3,7 +3,12 @@ include '../../config/config.php';
 include '../../config/koneksi.php';
 
 $id   = $_GET['id'];
-$data = $koneksi->query("SELECT * FROM perusahaan WHERE id_perusahaan = '$id'");
+$data = $koneksi->query("SELECT * FROM perbaikan AS p 
+LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
+LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
+WHERE 
+ p.id_perbaikan = '$id'");
 $row  = $data->fetch_array();
 
 $bln = array(
@@ -30,21 +35,15 @@ $bln = array(
 <html>
 
 <head>
-    <title>ReportL</title>
+    <title>Detail Perbaikan</title>
 </head>
 
 <body>
-<img src="<?=base_url('assets/dist/img/logo_pln.jpg')?>" align="left" width="90" height="90">
-  <p align="center"><b>
-    <font size="7">PT. GERAI INDAH MARABAHAN</font> <br> <br> <br> <br>
-    <hr size="2px" color="black">
-    <center><font size="2">Alamat : Jl. AES Nasution, Marabahan Kota, Marabahan Kabupaten Barito Kuala Kalimantan Selatan </font></center>
-    <hr size="2px" color="black">
-  </b></p>
+
     <!-- Kop Here ! -->
     <h3>
         <center><br>
-            Data Perusahaan<br>
+            Data Detail Perbaikan<br>
         </center>
     </h3><br><br>
     <div class="row">
@@ -56,49 +55,65 @@ $bln = array(
                             <b>
                                 <tr>
                                     <p>
-                                        <th width="40%">Nama Perusahaan </th>
-                                        <th><?php echo $row['nama_perusahaan'] ?></th>
+                                        <th width="40%">SEKTOR ATM </th>
+                                        <th>
+                                        <ul>
+                                            <li>Kode ATM : <?= $row['kode_barang'] ?></li>
+                                            <li>Nama ATM : <?= $row['nama_barang'] ?></li>
+                                            <li>Tanggal Peletakan : <?= $row['tgl_peletakan'] ?></li>
+                                            <li>Status Engine : <?= $row['status'] ?></li>
+                                            </ul>
+                                        </th>
                                     </p>
                                 </tr>
 
                                 <tr>
                                     <p>
-                                        <th>Bidang Perusahaan </th>
-                                        <th><?php echo $row['bidang_perusahaan'] ?></th>
+                                        <th>Nama Petugas </th>
+                                        <th>
+                                            <ul>
+                                                <li><?= $row['nama_petugas'] ?></li>
+                                            </ul>
+                                            
+                                        </th>
                                     </p>
                                 </tr>
                                 <tr>
                                     <p>
                                         <th>Alamat</th>
-                                        <th><?php echo $row['alamat_perusahaan'] ?></th>
+                                        <th>
+                                            <ul>
+                                                <li><?= $row['lokasi_atm'] ?></li>
+                                                <li><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></li>
+                                                </ul>
+                                            </th>
                                     </p>
                                 </tr>
                                 <tr>
+                                    
                                     <p>
-                                        <th>Tahun Berdiri </th>
-                                        <th><?php echo $row['tahun_berdiri'] ?></th>
+                                        <th>Sebelum Perbaikan </th>
+                                        <th>
+                                            <ul>
+                                                <li><?= $row['tanggal_perbaikan'] ?></li>
+                                                <li><img src="<?= base_url() ?>/filependukung/<?= $row['foto_sebelum'] ?>" width="100px"></li>
+                                            </ul>
+                                        </th>
                                     </p>
                                 </tr>
                                 <tr>
+                                    
                                     <p>
-                                        <th>Pimpinan/Kepala </th>
-                                        <th><?php echo $row['nama_pimpinan'] ?></th>
+                                        <th>Sesudah Perbaikan </th>
+                                        <th>
+                                            <ul>
+                                                <li><?= $row['tanggal_selesai'] ?></li>
+                                                <li><img src="<?= base_url() ?>/filependukung/<?= $row['foto_sesudah'] ?>" width="100px"></li>
+                                            </ul>
+                                        </th>
                                     </p>
                                 </tr>
-                                <tr>
-                                    <p>
-                                        <th>No. Telp Perusahaan </th>
-                                        <th><?php echo $row['no_telp'] ?></th>
-                                    </p>
-                                </tr>
-                                <tr>
-                                    <p>
-                                        <th>Email Perusahaan </th>
-                                        <th><?php echo $row['email'] ?></th>
-                                    </p>
-                                </tr>
-
-
+                               
                             </b>
                         </thead>
                     </table>

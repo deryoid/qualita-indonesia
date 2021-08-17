@@ -30,17 +30,11 @@ $bln = array(
 <html>
 
 <head>
-    <title>ReportL</title>
+    <title>Detail Perbaikan</title>
 </head>
 
 <body>
-<img src="<?=base_url('assets/dist/img/logo_pln.jpg')?>" align="left" width="90" height="90">
-  <p align="center"><b>
-    <font size="7">PT. GERAI INDAH MARABAHAN</font> <br> <br> <br> <br>
-    <hr size="2px" color="black">
-    <center><font size="2">Alamat : Jl. AES Nasution, Marabahan Kota, Marabahan Kabupaten Barito Kuala Kalimantan Selatan </font></center>
-    <hr size="2px" color="black">
-  </b></p>
+
     <!-- Kop Here ! -->
     <h3>
         <center><br>

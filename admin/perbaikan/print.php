@@ -4,7 +4,6 @@ include '../../config/koneksi.php';
 
 $no = 1;
 
-$data = $koneksi->query("SELECT * FROM perusahaan  ORDER BY id_perusahaan DESC");
 
 $bln = array(
     '01' => 'Januari',
@@ -35,15 +34,9 @@ $bln = array(
 </head>
 
 <body>
-<img src="<?=base_url('assets/dist/img/logo_pln.jpg')?>" align="left" width="90" height="90">
-  <p align="center"><b>
-    <font size="7">PT. GERAI INDAH MARABAHAN</font> <br> <br> <br> <br>
-    <hr size="2px" color="black">
-    <center><font size="2">Alamat : Jl. AES Nasution, Marabahan Kota, Marabahan Kabupaten Barito Kuala Kalimantan Selatan </font></center>
-    <hr size="2px" color="black">
-  </b></p>
+
     <p align="center"><b>
-            <font size="5">Output Perusahaan</font> <br>
+            <font size="5">Laporan Perbaikan</font> <br>
             <hr size="2px" color="black">
         </b></p>
 
@@ -51,25 +44,48 @@ $bln = array(
         <div class="col-sm-12">
             <div class="card-box table-responsive">
                 <table border="1" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Perusahaan</th>
-                            <th>Bidang Perusahaan</th>
-                            <th>Alamat</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php while ($row = mysqli_fetch_array($data)) { ?>
-                            <tr>
-                                <td align="center"><?= $no++ ?></td>
-                                <td><?= $row['nama_perusahaan'] ?></td>
-                                <td><?= $row['bidang_perusahaan'] ?></td>
-                                <td><?= $row['alamat_perusahaan'] ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
+                <thead class="bg-blue">
+                                                <tr align="center">
+                                                    <th>No</th>
+                                                    <th>Sektor ATM</th>
+                                                    <th>Petugas</th>
+                                                    <th>Lokasi ATM</th>
+                                                    <th>Tanggal Perbaikan</th>
+                                                    <th>Status Perbaikan</th>
+                                                </tr>
+                                            </thead>
+                                            <?php
+                                            $no = 1;
+                                            $data = $koneksi->query("SELECT * FROM perbaikan AS p 
+                                            LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
+                                            LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+                                            LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
+                                            WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
+                                            while ($row = $data->fetch_array()) {
+                                            ?>
+                                                <tbody style="background-color: white">
+                                                    <tr>
+                                                        <td align="center"><?= $no++ ?></td>
+                                                        <td>
+                                                            <ul>
+                                                            <li>Kode ATM : <?= $row['kode_barang'] ?></li>
+                                                            <li>Nama ATM : <?= $row['nama_barang'] ?></li>
+                                                            <li>Tanggal Peletakan : <?= $row['tgl_peletakan'] ?></li>
+                                                            <li>Status Engine : <?= $row['status'] ?></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><?= $row['nama_petugas'] ?></td>
+                                                        <td>
+                                                            <ul>
+                                                            <li><?= $row['lokasi_atm'] ?></li>
+                                                            <li><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></li>
+                                                            </ul>
+                                                        </td>
+                                                        <td><?= $row['tanggal_perbaikan'] ?></td>
+                                                        <td><?= $row['status_perbaikan'] ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            <?php } ?>
 
                 </table>
 

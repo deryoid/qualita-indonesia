@@ -51,7 +51,8 @@ include '../../templates/head.php';
                             <div class="card card-primary card-outline">
                                 <div class="card-header">
                                     <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
-                                    <!-- <a href="print" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a> -->
+                                    <a href="print" target="blank" class="btn bg-info"><i class="fa fa-print"> Cetak</i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_print" class="btn bg-info"><i class="fa fa-print"> Cetak Per/Petugas</i></a>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -216,3 +217,55 @@ if (isset($_GET['id'])) {
         }
     
     ?>
+
+    
+
+ <!-- MODAL Print -->
+ <div id="modal_print" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cetak</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+    <!-- Start content -->
+        <div class="content">
+            <div class="container"> 
+                <div class="row">
+                     <div class="col-sm-12">
+                          <div class="card-box">
+                                <form class="form-horizontal" action="printmaintance" method="POST" target="blank">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 control-label">Pilih Petugas </label>
+                                            <div class="col-sm-12">
+                                            <select class="form control select2" name="nama_petugas" data-placeholder="Pilih" style="width: 100%;" required>
+                                                    <option value=""></option>
+                                                    <?php
+                                                    $sd = $koneksi->query("SELECT nama_petugas FROM perbaikan AS p
+                                                    LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
+                                                    
+                                                    GROUP BY nama_petugas");
+                                                    foreach ($sd as $item) {
+                                                    ?>
+                                                        <option value="<?= $item['nama_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
+                                                        
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <input type="submit" name="print" class="btn btn-success" value="Print">
+
+                                </form>
+                                       
+                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

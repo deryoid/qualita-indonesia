@@ -72,6 +72,7 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th>No</th>
                                                     <th>Sektor ATM</th>
+                                                    <th>Petugas</th>
                                                     <th>Lokasi ATM</th>
                                                     <th>Tanggal Perbaikan</th>
                                                     <th>Foto Sebelum Perbaikan</th>
@@ -83,6 +84,7 @@ include '../../templates/head.php';
                                             $data = $koneksi->query("SELECT * FROM perbaikan AS p 
                                             LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+                                            LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
                                             WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
@@ -98,7 +100,7 @@ include '../../templates/head.php';
                                                             <li>Status Engine : <b><?= $row['status'] ?></b></li>
                                                             </ul>
                                                         </td>
-
+                                                        <td><?= $row['nama_petugas'] ?></td>
                                                         <td>
                                                             <ul>
                                                             <li><?= $row['lokasi_atm'] ?></li>

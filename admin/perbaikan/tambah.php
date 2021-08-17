@@ -79,6 +79,21 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Petugas</label>
+                                            <div class="col-sm-10">
+                                            <select class="form control select2" name="id_petugas" data-placeholder="Pilih" style="width: 100%;" required>
+                                                    <option value=""></option>
+                                                    <?php
+                                                    $sd = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
+                                                    foreach ($sd as $item) {
+                                                    ?>
+                                                        <option value="<?= $item['id_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
+                                                        
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Tanggal Perbaikan</label>
                                             <div class="col-sm-10">
                                                 <input type="date" class="form-control" name="tanggal_perbaikan">
@@ -126,6 +141,7 @@ include '../../templates/head.php';
     <?php
     if (isset($_POST['submit'])) {
         $id_sektoratm        = $_POST['id_sektoratm'];
+        $id_petugas        = $_POST['id_petugas'];
         $tanggal_perbaikan   = $_POST['tanggal_perbaikan'];
 
 
@@ -133,6 +149,7 @@ include '../../templates/head.php';
         $submit = $koneksi->query("INSERT INTO perbaikan VALUES (
             NULL,
             '$id_sektoratm',
+            '$id_petugas',
             '$tanggal_perbaikan',
             NULL,
             NULL,
