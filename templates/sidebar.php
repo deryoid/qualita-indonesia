@@ -132,7 +132,15 @@
             <a href="<?= base_url('teknisi/perbaikan') ?>" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
               <p>
-                Update Status Perbaikan
+                Progres Perbaikan
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('teknisi/perbaikan_selesai') ?>" class="nav-link">
+              <i class="nav-icon fas fa-check"></i>
+              <p>
+                Perbaikan Selesai
               </p>
             </a>
           </li>

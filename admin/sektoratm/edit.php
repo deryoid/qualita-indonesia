@@ -182,8 +182,20 @@ include '../../templates/head.php';
                             WHERE 
                             id_sektoratm = '$id'");
 
-        if ($submit) {
-            $_SESSION['pesan'] = "Data Sektor ATM Ditambahkan";
+
+
+$cekstatus = $koneksi->query("SELECT * FROM sektor_atm AS sa
+LEFT JOIN perbaikan AS p ON sa.id_sektoratm = p.id_sektoratm
+WHERE sa.id_sektoratm  = '$id'")->fetch_array();
+// var_dump($cekstatus);die;
+        if ($cekstatus['status'] == "Tidak Aktif"){
+           $koneksi->query("UPDATE perbaikan SET  
+                       status_perbaikan = 'Sedang Diperbaiki'
+                       WHERE 
+                       id_sektoratm = '$id_sektoratm'");
+        }   
+if ($submit) {
+    $_SESSION['pesan'] = "Data Sektor ATM Ditambahkan";
             echo "<script>window.location.replace('../sektoratm/');</script>";
         }
     }
