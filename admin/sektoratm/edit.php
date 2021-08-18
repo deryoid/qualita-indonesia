@@ -71,7 +71,7 @@ include '../../templates/head.php';
                                                     $sd = $koneksi->query("SELECT * FROM barang ORDER BY kode_barang DESC");
                                                     foreach ($sd as $item) {
                                                     ?>
-                                                       <option value="<?= $item['kode_barang'] ?>" <?php if ($item['kode_barang'] == $item['kode_barang']) {
+                                                       <option value="<?= $item['kode_barang'] ?>" <?php if ($item['kode_barang'] == $row['kode_barang']) {
                                                                             echo 'selected';
                                                                         } ?>><?= $item['kode_barang'] ?><?= $item['nama_barang'] ?></option>
                                                         

@@ -266,11 +266,11 @@ if (!empty($es)) {
                             id_perbaikan = '$id'");
 // var_dump($submit, $koneksi->error); die();
 if ($submit) {
-    
     $koneksi->query("UPDATE sektor_atm SET  
             status = 'Aktif'
             WHERE 
-            id_sektoratm = '$sd[id_sektoratm]'");
+            id_sektoratm = '$row[id_sektoratm]'");
+    
     
             $_SESSION['pesan'] = "Data Perbaikan Ditambahkan";
             echo "<script>window.location.replace('../perbaikan_selesai/');</script>";

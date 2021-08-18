@@ -105,7 +105,7 @@ include '../../templates/head.php';
                                                         <td><?= $row['tgl_maintance'] ?></td>
                                                         <td><?= $row['keterangan'] ?></td>
                                                         <td align="center">
-                                                            <a href="edit?id=<?= $row['id_maintance'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
+                                                            <!-- <a href="edit?id=<?= $row['id_maintance'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a> -->
                                                             
                                                             <a href="index?id=<?= $row['id_maintance'] ?>" class="btn btn-info btn-sm" title="Kirim"><i class="fa fa-mail-bulk"></i></a>
 

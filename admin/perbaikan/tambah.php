@@ -69,7 +69,8 @@ include '../../templates/head.php';
                                                     <option value=""></option>
                                                     <?php
                                                     $sd = $koneksi->query("SELECT * FROM sektor_atm AS sa 
-                                                    LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang WHERE sa.status = 'Tidak Aktif'");
+                                                    LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang 
+                                                    WHERE sa.status = 'Tidak Aktif'");
                                                     foreach ($sd as $item) {
                                                     ?>
                                                         <option value="<?= $item['id_sektoratm'] ?>"><?= $item['kode_barang'] ?><?= $item['nama_barang'] ?></option>

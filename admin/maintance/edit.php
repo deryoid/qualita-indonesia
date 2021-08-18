@@ -62,54 +62,56 @@ include '../../templates/head.php';
                                     <!-- form start -->
                                     <div class="card-body" style="background-color: white;">
 
+                                    
                                     <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Kode Barang</label>
+                                            <label for="" class="col-sm-2 col-form-label">Sektor Atm</label>
                                             <div class="col-sm-10">
-                                            <select class="form control select2" name="kode_barang" data-placeholder="Pilih" style="width: 100%;" required>
+                                            <select class="form control select2" name="id_sektoratm" data-placeholder="Pilih" style="width: 100%;" required>
                                                     <option value=""></option>
                                                     <?php
-                                                    $sd = $koneksi->query("SELECT * FROM barang ORDER BY kode_barang DESC");
+                                                    $sd = $koneksi->query("SELECT * FROM sektor_atm ORDER BY id_sektoratm DESC");
                                                     foreach ($sd as $item) {
                                                     ?>
-                                                       <option value="<?= $item['kode_barang'] ?>" <?php if ($item['kode_barang'] == $item['kode_barang']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?= $item['kode_barang'] ?><?= $item['nama_barang'] ?></option>
+                                                        <option value="<?= $item['id_sektoratm'] ?>"><?= $item['id_sektoratm'] ?><?= $item['kode_barang'] ?></option>
                                                         
                                                     <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Lokasi ATM</label>
+                                            <label for="" class="col-sm-2 col-form-label">Status Maintance</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="lokasi_atm"><?= $row['lokasi_atm'] ?></textarea>
+                                                <textarea type="text" class="form-control" name="status_maintance"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Link Gmap</label>
+                                            <label for="" class="col-sm-2 col-form-label">Petugas</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="link_gmap"><?= $row['link_gmap'] ?></textarea>
+                                            <select class="form control select2" name="id_petugas" data-placeholder="Pilih" style="width: 100%;" required>
+                                                    <option value=""></option>
+                                                    <?php
+                                                    $sd = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
+                                                    foreach ($sd as $item) {
+                                                    ?>
+                                                        <option value="<?= $item['id_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
+                                                        
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Tanggal Peletakan</label>
+                                            <label for="" class="col-sm-2 col-form-label">Tanggal Maintance</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="tgl_peletakan" value="<?= $row['tgl_peletakan'] ?>">
+                                                <input type="date" class="form-control" name="tgl_maintance">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Status</label>
+                                            <label for="" class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
-                                            <select class="form-control select2" data-placeholder="Pilih" id="status" name="status" required="">
-                                                    <option value="Aktif" <?php if ($row['status'] == "Aktif") {
-                                                                            echo "selected";
-                                                                            } ?>>Aktif</option>
-                                                    <option value="Tidak Aktif" <?php if ($row['status'] == "Tidak Aktif") {
-                                                                                echo "selected";
-                                                                            } ?>>Tidak Aktif</option>
-                                            </select>
+                                            <textarea type="text" class="form-control" name="keterangan"></textarea>
                                             </div>
                                         </div>
+                                      
                                        
 
                                     </div>
