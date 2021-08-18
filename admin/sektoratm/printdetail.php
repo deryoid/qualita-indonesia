@@ -83,7 +83,7 @@ $bln = array(
                                 <tr>
                                     <p>
                                         <th>Tanggal Peletakan</th>
-                                        <th><?php echo $row['tanggal_peletakan'] ?></th>
+                                        <th><?php echo $row['tgl_peletakan'] ?></th>
                                     </p>
                                 </tr>
                                 <tr>

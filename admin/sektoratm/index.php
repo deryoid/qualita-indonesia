@@ -99,6 +99,7 @@ include '../../templates/head.php';
                                                         <td><?= $row['tgl_peletakan'] ?></td>
                                                         <td><?= $row['status'] ?></td>
                                                         <td align="center">
+                                                        <a href="printdetail?id=<?= $row['id_sektoratm'] ?>" target="blank" class="btn btn-info btn-sm" title="detail"><i class="fa fa-print"></i></a>
                                                             <a href="edit?id=<?= $row['id_sektoratm'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                             <a href="hapus?id=<?= $row['id_sektoratm'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
                                                         </td>
