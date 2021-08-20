@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 18 Agu 2021 pada 13.20
+-- Waktu pembuatan: 20 Agu 2021 pada 14.34
 -- Versi server: 5.7.24
 -- Versi PHP: 7.4.12
 
@@ -55,15 +55,16 @@ CREATE TABLE `maintance` (
   `status_maintance` varchar(75) NOT NULL,
   `id_petugas` int(11) DEFAULT NULL,
   `tgl_maintance` varchar(150) DEFAULT NULL,
-  `keterangan` varchar(255) DEFAULT NULL
+  `keterangan` varchar(255) DEFAULT NULL,
+  `status_pemeliharaan` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `maintance`
 --
 
-INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id_petugas`, `tgl_maintance`, `keterangan`) VALUES
-(7, 5, 'Maintance ', 2, '2021-08-18', 'Maintance Rutin');
+INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id_petugas`, `tgl_maintance`, `keterangan`, `status_pemeliharaan`) VALUES
+(9, 5, 'Preventive Maintenance', 4, '2021-08-20', '<p>1. Pemeliharan Mesin DLL</p><p>2. Kebersihan ATM&nbsp;</p>', 'Pemeliharaan Selesai');
 
 -- --------------------------------------------------------
 
@@ -74,7 +75,7 @@ INSERT INTO `maintance` (`id_maintance`, `id_sektoratm`, `status_maintance`, `id
 CREATE TABLE `perbaikan` (
   `id_perbaikan` int(11) NOT NULL,
   `id_sektoratm` int(11) DEFAULT NULL,
-  `id_petugas` int(11) NOT NULL,
+  `id_petugas` int(11) DEFAULT NULL,
   `tanggal_perbaikan` date DEFAULT NULL,
   `foto_sebelum` varchar(255) DEFAULT NULL,
   `tanggal_selesai` date DEFAULT NULL,
@@ -87,8 +88,9 @@ CREATE TABLE `perbaikan` (
 --
 
 INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `id_petugas`, `tanggal_perbaikan`, `foto_sebelum`, `tanggal_selesai`, `foto_sesudah`, `status_perbaikan`) VALUES
-(5, 5, 2, '2021-08-18', '25636.png', '2021-08-19', '61042.jpeg', 'Perbaikan Selesai'),
-(6, 4, 2, '2021-08-18', '46947.jpeg', '2021-08-19', '77956.jpeg', 'Perbaikan Selesai');
+(5, 5, 4, '2021-08-18', '25636.png', '2021-08-19', '61042.jpeg', 'Sedang Diperbaiki'),
+(6, 4, 3, '2021-08-18', '46947.jpeg', '2021-08-19', '77956.jpeg', 'Sedang Diperbaiki'),
+(7, 5, 3, '2021-08-20', NULL, NULL, NULL, 'Sedang Diperbaiki');
 
 -- --------------------------------------------------------
 
@@ -98,16 +100,18 @@ INSERT INTO `perbaikan` (`id_perbaikan`, `id_sektoratm`, `id_petugas`, `tanggal_
 
 CREATE TABLE `petugas` (
   `id_petugas` int(11) NOT NULL,
-  `nama_petugas` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `id_user` int(11) DEFAULT NULL,
+  `nama_petugas` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `petugas`
 --
 
-INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `email`) VALUES
-(2, 'Rizky Maulana Semanggi', 'rizkysemanggi@gmail.com');
+INSERT INTO `petugas` (`id_petugas`, `id_user`, `nama_petugas`, `email`) VALUES
+(3, 3, 'Rizky Maulana Semanggi', 'dery.fk.ulm@gmail.com'),
+(4, 4, 'Maulana Malik Ibrahim', 'dery037yj@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -131,9 +135,9 @@ CREATE TABLE `sektor_atm` (
 --
 
 INSERT INTO `sektor_atm` (`id_sektoratm`, `kode_barang`, `bank`, `kecamatan`, `lokasi_atm`, `link_gmap`, `tgl_peletakan`, `status`) VALUES
-(3, 'CVX15466237IIL2', 'BRI', 'Banjarmasin Tengah', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Aktif'),
-(4, 'CVX15466332XY1', 'BNI', 'Banjarmasin Tengah', 'Jl. Mayjen Sutoyo S No.Rt 18, Tlk. Dalam, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70117', 'https://goo.gl/maps/iwcS2uEnibTPWFhQ8', '2021-07-15', 'Aktif'),
-(5, 'KBX166237877J234', 'Mandiri', 'Banjarmasin Timur', 'Jl. A. Yani, Pemurus Baru, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70234', 'https://goo.gl/maps/QWHEBHgernb4N2pS8', '2011-08-18', 'Aktif');
+(3, 'CVX15466237IIL2', 'BRI', 'Banjarmasin Tengah', 'Jl. Let. Jend. S. Parman No.1, Antasan Besar, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70123', 'https://goo.gl/maps/4Amrs4RHfCKonVqa7', '2021-07-14', 'Tidak Aktif'),
+(4, 'CVX15466332XY1', 'BNI', 'Banjarmasin Tengah', 'Jl. Mayjen Sutoyo S No.Rt 18, Tlk. Dalam, Kec. Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan 70117', 'https://goo.gl/maps/iwcS2uEnibTPWFhQ8', '2021-07-15', 'Tidak Aktif'),
+(5, 'KBX166237877J234', 'Mandiri', 'Banjarmasin Timur', 'Jl. A. Yani, Pemurus Baru, Kec. Banjarmasin Tim., Kota Banjarmasin, Kalimantan Selatan 70234', 'https://goo.gl/maps/QWHEBHgernb4N2pS8', '2011-08-18', 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -154,7 +158,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `role`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator'),
-(2, 'teknisi', 'e21394aaeee10f917f581054d24b031f', 'Teknisi');
+(3, 'teknisi1', 'e21394aaeee10f917f581054d24b031f', 'Teknisi'),
+(4, 'teknisi2', 'e21394aaeee10f917f581054d24b031f', 'Teknisi');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +192,8 @@ ALTER TABLE `perbaikan`
 -- Indeks untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
-  ADD PRIMARY KEY (`id_petugas`);
+  ADD PRIMARY KEY (`id_petugas`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `sektor_atm`
@@ -211,19 +217,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `maintance`
 --
 ALTER TABLE `maintance`
-  MODIFY `id_maintance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_maintance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `perbaikan`
 --
 ALTER TABLE `perbaikan`
-  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_perbaikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `sektor_atm`
@@ -235,7 +241,7 @@ ALTER TABLE `sektor_atm`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
