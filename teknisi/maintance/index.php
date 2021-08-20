@@ -49,11 +49,6 @@ include '../../templates/head.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
-                                    <a href="print" target="blank" class="btn bg-info"><i class="fa fa-print"> Cetak</i></a>
-                                    <a href="#" data-toggle="modal" data-target="#modal_print" class="btn bg-info"><i class="fa fa-print"> Cetak Per/Petugas</i></a>
-                                </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <?php
@@ -77,6 +72,7 @@ include '../../templates/head.php';
                                                     <th>Petugas</th>
                                                     <th>Tanggal Pemeliharaan</th>
                                                     <th>Keterangan</th>
+                                                    <th>Status</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
@@ -86,7 +82,7 @@ include '../../templates/head.php';
                                             LEFT JOIN sektor_atm AS sa ON m.id_sektoratm = sa.id_sektoratm
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
                                             LEFT JOIN petugas AS p ON m.id_petugas = p.id_petugas
-                                            ORDER BY m.id_maintance DESC");
+                                            WHERE  p.id_petugas = '$_SESSION[id_petugas]' ORDER BY m.id_maintance DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
@@ -104,12 +100,10 @@ include '../../templates/head.php';
                                                         <td><?= $row['nama_petugas'] ?></td>
                                                         <td><?= $row['tgl_maintance'] ?></td>
                                                         <td><?= $row['keterangan'] ?></td>
+                                                        <td><?= $row['status_pemeliharaan'] ?></td>
                                                         <td align="center">
-                                                            <!-- <a href="edit?id=<?= $row['id_maintance'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a> -->
+                                                            <a href="edit?id=<?= $row['id_maintance'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                             
-                                                            <a href="index?id=<?= $row['id_maintance'] ?>" class="btn btn-info btn-sm" title="Kirim"><i class="fa fa-mail-bulk"></i></a>
-
-                                                            <a href="hapus?id=<?= $row['id_maintance'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
                                                         </td>
                                                     </tr>
                                                 </tbody>

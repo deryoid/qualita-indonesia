@@ -2,7 +2,7 @@
 require '../../config/config.php';
 require '../../config/koneksi.php';
 $id   = $_GET['id'];
-$data = $koneksi->query("SELECT * FROM sektor_atm WHERE id_sektoratm = '$id'");
+$data = $koneksi->query("SELECT * FROM maintance WHERE id_maintance  = '$id'");
 $row  = $data->fetch_array();
 ?>
 <!DOCTYPE html>
@@ -32,11 +32,11 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Ubah Sektor ATM</h1>
+                            <h1 class="m-0 text-dark">Ubah Pemeliharaan</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Sektor ATM</li>
+                                <li class="breadcrumb-item active">Pemeliharaan</li>
                                 <li class="breadcrumb-item active">Ubah Data</li>
                             </ol>
                         </div><!-- /.col -->
@@ -81,7 +81,7 @@ include '../../templates/head.php';
                                         <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Status Maintance</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="status_maintance"></textarea>
+                                                <input type="text" class="form-control"  value="Preventive Maintenance" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -100,7 +100,7 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Tanggal Maintance</label>
+                                            <label for="" class="col-sm-2 col-form-label">Tanggal Pemeliharaan</label>
                                             <div class="col-sm-10">
                                                 <input type="date" class="form-control" name="tgl_maintance">
                                             </div>
@@ -112,13 +112,25 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                       
-                                       
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Status Pemeliharaan</label>
+                                            <div class="col-sm-10">
+                                            <select class="form-control select2" data-placeholder="Pilih" id="status_pemeliharaan" name="status_pemeliharaan">
+                                                    <option value="Proses Pemeliharaan" <?php if ($row['status_pemeliharaan'] == "Proses Pemeliharaan") {
+                                                                            echo "selected";
+                                                                            } ?>>Proses Pemeliharaan</option>
+                                                    <option value="Pemeliharaan Selesai" <?php if ($row['status_pemeliharaan'] == "Pemeliharaan Selesai") {
+                                                                                echo "selected";
+                                                                            } ?>>Pemeliharaan Selesai</option>
+                                            </select>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="background-color: white;">
-                                        <a href="<?= base_url('admin/sektoratm/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
+                                        <a href="<?= base_url('admin/maintance/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
                                         <button type="submit" name="submit" class="btn bg-gradient-primary float-right mr-2"><i class="fa fa-save"> Ubah</i></button>
                                     </div>
                                     <!-- /.card-footer -->
@@ -153,24 +165,26 @@ include '../../templates/head.php';
 
     <?php
     if (isset($_POST['submit'])) {
-        $kode_barang        = $_POST['kode_barang'];
-        $lokasi_atm         = $_POST['lokasi_atm'];
-        $link_gmap          = $_POST['link_gmap'];
-        $tgl_peletakan      = $_POST['tgl_peletakan'];
-        $status             = $_POST['status'];
+        $id_sektoratm        = $_POST['id_sektoratm'];
+        $status_maintance         = $_POST['status_maintance'];
+        $id_petugas          = $_POST['id_petugas'];
+        $tgl_maintance      = $_POST['tgl_maintance'];
+        $keterangan      = $_POST['keterangan'];
+        $status_pemeliharaan      = $_POST['status_pemeliharaan'];
 
-        $submit = $koneksi->query("UPDATE sektor_atm SET  
-                            kode_barang = '$kode_barang',
-                            lokasi_atm = '$lokasi_atm',
-                            link_gmap = '$link_gmap',
-                            tgl_peletakan = '$tgl_peletakan',
-                            status = '$status'
+        $submit = $koneksi->query("UPDATE maintance SET  
+                            id_sektoratm = '$id_sektoratm',
+                            status_maintance = '$status_maintance',
+                            id_petugas = '$id_petugas',
+                            tgl_maintance = '$tgl_maintance',
+                            keterangan = '$keterangan',
+                            status_pemeliharaan = '$status_pemeliharaan'
                             WHERE 
-                            id_sektoratm = '$id'");
+                            id_maintance = '$id'");
 
         if ($submit) {
-            $_SESSION['pesan'] = "Data Sektor ATM Ditambahkan";
-            echo "<script>window.location.replace('../sektoratm/');</script>";
+            $_SESSION['pesan'] = "Data Pemeliharaan Ditambahkan";
+            echo "<script>window.location.replace('../maintance/');</script>";
         }
     }
 

@@ -10,7 +10,8 @@ include '../templates/head.php';
 $pengumuman = $koneksi->query("SELECT * FROM perbaikan AS p 
 LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
 LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
-WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
+LEFT JOIN petugas AS ptg ON p.id_petugas = ptg.id_petugas 
+WHERE sa.status = 'Tidak Aktif' AND p.id_petugas = '$_SESSION[id_petugas]' ORDER BY p.id_perbaikan DESC");
 
 ?>
 

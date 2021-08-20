@@ -80,7 +80,7 @@ include '../../templates/head.php';
                                         <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Status Maintance</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="status_maintance"></textarea>
+                                                <input type="text" class="form-control" name="status_maintance" value="Preventive Maintenance" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -104,13 +104,6 @@ include '../../templates/head.php';
                                                 <input type="date" class="form-control" name="tgl_maintance">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Keterangan</label>
-                                            <div class="col-sm-10">
-                                            <textarea type="text" class="form-control" name="keterangan"></textarea>
-                                            </div>
-                                        </div>
-                                        
                                     </div>
                                     <!-- /.card-body -->
 
@@ -155,6 +148,7 @@ include '../../templates/head.php';
         $id_petugas          = $_POST['id_petugas'];
         $tgl_maintance      = $_POST['tgl_maintance'];
         $keterangan      = $_POST['keterangan'];
+        $status_pemeliharaan      = $_POST['status_pemeliharaan'];
 
 
 
@@ -164,7 +158,8 @@ include '../../templates/head.php';
             '$status_maintance',
             '$id_petugas',
             '$tgl_maintance',
-            '$keterangan'
+            '$keterangan',
+            '$status_pemeliharaan'
             )");
 
 

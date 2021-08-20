@@ -134,6 +134,12 @@ if (isset($_POST['login'])) {
     if ($role == "Administrator") {
       echo "<script>window.location.replace('admin/');</script>";
     } elseif ($role == "Teknisi") {
+      $ptg = $koneksi->query("SELECT * FROM petugas AS p 
+      LEFT JOIN user AS u ON p.id_user = u.id_user
+      WHERE p.id_user = '$_SESSION[id_user]'
+      ")->fetch_array();
+      $_SESSION['nama_petugas']  = $ptg['nama_petugas'];
+      $_SESSION['id_petugas'] = $ptg['id_petugas'];
       echo "<script>window.location.replace('teknisi/');</script>";
     } else {
     $_SESSION['pesan'] = 'Username atau Password Tidak Ditemukan';

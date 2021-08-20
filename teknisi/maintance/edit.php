@@ -2,7 +2,7 @@
 require '../../config/config.php';
 require '../../config/koneksi.php';
 $id   = $_GET['id'];
-$data = $koneksi->query("SELECT * FROM perbaikan WHERE id_perbaikan = '$id'");
+$data = $koneksi->query("SELECT * FROM maintance WHERE id_maintance = '$id'");
 $row  = $data->fetch_array();
 ?>
 <!DOCTYPE html>
@@ -32,11 +32,11 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Ubah Perbaikan ATM</h1>
+                            <h1 class="m-0 text-dark">Ubah Pemeliharaan</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item active">Perbaikan ATM</li>
+                                <li class="breadcrumb-item active">Pemeliharaan</li>
                                 <li class="breadcrumb-item active">Ubah Data</li>
                             </ol>
                         </div><!-- /.col -->
@@ -56,80 +56,72 @@ include '../../templates/head.php';
                                 <!-- Horizontal Form -->
                                 <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Perbaikan ATM</h3>
+                                        <h3 class="card-title">Sektor ATM</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <div class="card-body" style="background-color: white;">
 
+                                    
                                     <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Kode Barang</label>
                                             <div class="col-sm-10">
-                                            <select class="form control select2" name="id_sektoratm" data-placeholder="Pilih" style="width: 100%;" required>
-                                                    <option value=""></option>
-                                                    <?php
+                                            <?php
                                                     $sd = $koneksi->query("SELECT * FROM sektor_atm AS sa 
-                                                    LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang WHERE sa.status = 'Tidak Aktif'");
-                                                    foreach ($sd as $item) {
+                                                    LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang")->fetch_array();
                                                     ?>
-                                                       <option value="<?= $item['id_sektoratm'] ?>" <?php if ($item['id_sektoratm'] == $row['id_sektoratm']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?= $item['kode_barang'] ?><?= $item['nama_barang'] ?></option>
-                                                        
-                                                    <?php } ?>
-                                                </select>
+                                            <input type="text" class="form-control"  value="<?= $sd['kode_barang'] ?><?= $sd['nama_barang'] ?>" readonly>
                                             </div>
                                         </div>
-                                          <div class="form-group row">
+                                    <div class="form-group row">
                                             <label for="" class="col-sm-2 col-form-label">Petugas</label>
                                             <div class="col-sm-10">
-                                            <select class="form control select2" name="id_petugas" data-placeholder="Pilih" style="width: 100%;" required>
-                                                    <option value=""></option>
-                                                    <?php
-                                                    $pt = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
-                                                    foreach ($pt as $item) {
+                                            <?php
+                                                    $sd = $koneksi->query("SELECT * FROM petugas WHERE id_petugas = '$_SESSION[id_petugas]'")->fetch_array();
                                                     ?>
-                                                       <option value="<?= $item['id_petugas'] ?>" <?php if ($item['id_petugas'] == $row['id_petugas']) {
-                                                                            echo 'selected';
-                                                                        } ?>><?= $item['nama_petugas'] ?></option>
-                                                        
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Tanggal Perbaikan</label>
-                                            <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="tanggal_perbaikan" value="<?= $row['tanggal_perbaikan'] ?>">
+                                            <input type="text" class="form-control"  value="<?= $sd['nama_petugas'] ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Tanggal Selesai</label>
+                                            <label for="" class="col-sm-2 col-form-label">Status Maintance</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="tanggal_selesai"  value="<?= $row['tanggal_selesai'] ?>">
+                                                <input type="text" class="form-control"  value="Preventive Maintenance" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Status Perbaikan</label>
+                                            <label for="" class="col-sm-2 col-form-label">Tanggal Pemeliharaan</label>
                                             <div class="col-sm-10">
-                                            <select class="form-control select2" data-placeholder="Pilih" id="status_perbaikan" name="status_perbaikan">
-                                                    <option value="Sedang Diperbaiki" <?php if ($row['status_perbaikan'] == "Sedang Diperbaiki") {
+                                                <input type="date" class="form-control" value="<?= $row['tgl_maintance'] ?>" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Keterangan</label>
+                                            <div class="col-sm-10">
+                                            <textarea class="textarea" name ="keterangan"
+                                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?php echo $row['keterangan'];?>
+                                            </textarea>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Status Pemeliharaan</label>
+                                            <div class="col-sm-10">
+                                            <select class="form-control select2" data-placeholder="Pilih" id="status_pemeliharaan" name="status_pemeliharaan">
+                                                <option value="Pemeliharaan Selesai" <?php if ($row['status_pemeliharaan'] == "Pemeliharaan Selesai") {
                                                                             echo "selected";
-                                                                            } ?>>Sedang Diperbaiki</option>
-                                                    <option value="Perbaikan Selesai" <?php if ($row['status_perbaikan'] == "Perbaikan Selesai") {
-                                                                                echo "selected";
-                                                                            } ?>>Perbaikan Selesai</option>
+                                                                        } ?>>Pemeliharaan Selesai</option>
+                                                    <option value="Proses Pemeliharaan" <?php if ($row['status_pemeliharaan'] == "Proses Pemeliharaan") {
+                                                                            echo "selected";
+                                                                            } ?>>Proses Pemeliharaan</option>
                                             </select>
                                             </div>
                                         </div>
-                                       
 
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="background-color: white;">
-                                        <a href="<?= base_url('admin/perbaikan/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
+                                        <a href="<?= base_url('admin/maintance/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
                                         <button type="submit" name="submit" class="btn bg-gradient-primary float-right mr-2"><i class="fa fa-save"> Ubah</i></button>
                                     </div>
                                     <!-- /.card-footer -->
@@ -164,24 +156,18 @@ include '../../templates/head.php';
 
     <?php
     if (isset($_POST['submit'])) {
-        $id_sektoratm        = $_POST['id_sektoratm'];
-        $id_petugas        = $_POST['id_petugas'];
-        $tanggal_perbaikan   = $_POST['tanggal_perbaikan'];
-        $tanggal_selesai     = $_POST['tanggal_selesai'];
-        $status_perbaikan    = $_POST['status_perbaikan'];
+        $keterangan      = $_POST['keterangan'];
+        $status_pemeliharaan      = $_POST['status_pemeliharaan'];
 
-        $submit = $koneksi->query("UPDATE perbaikan SET  
-                            id_sektoratm = '$id_sektoratm',
-                            id_petugas = '$id_petugas',
-                            tanggal_perbaikan = '$tanggal_perbaikan',
-                            tanggal_selesai = '$tanggal_selesai',
-                            status_perbaikan = '$status_perbaikan'
+        $submit = $koneksi->query("UPDATE maintance SET  
+                            keterangan = '$keterangan',
+                            status_pemeliharaan = '$status_pemeliharaan'
                             WHERE 
-                            id_perbaikan = '$id'");
+                            id_maintance = '$id'");
 
         if ($submit) {
-            $_SESSION['pesan'] = "Data Perbaikan Ditambahkan";
-            echo "<script>window.location.replace('../perbaikan/');</script>";
+            $_SESSION['pesan'] = "Data Pemeliharaan Ditambahkan";
+            echo "<script>window.location.replace('../maintance/');</script>";
         }
     }
 

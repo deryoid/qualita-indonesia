@@ -78,7 +78,7 @@ include '../../templates/head.php';
                                             <label for="" class="col-sm-2 col-form-label">Petugas</label>
                                             <div class="col-sm-10">
                                             <?php
-                                                    $sd = $koneksi->query("SELECT * FROM petugas ")->fetch_array();
+                                                    $sd = $koneksi->query("SELECT * FROM petugas WHERE id_petugas = '$_SESSION[id_petugas]'")->fetch_array();
                                                     ?>
                                             <input type="text" class="form-control"  value="<?= $sd['nama_petugas'] ?>" readonly>
                                             </div>

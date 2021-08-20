@@ -19,7 +19,7 @@
             if ($_SESSION['role'] == "Administrator") {
               echo "Administrator";
             } elseif ($_SESSION['role'] == "Teknisi") {
-              echo "Teknisi";
+              echo $_SESSION['nama_petugas'];
             }
             ?>
           </i>
@@ -54,6 +54,14 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= base_url('admin/user') ?>" class="nav-link">
+                  <i class="fas fa-circle nav-icon"></i>
+                  <p>User</p>
+                </a>
+              </li>
+            </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?= base_url('admin/barang') ?>" class="nav-link">
@@ -93,7 +101,7 @@
             <a href="<?= base_url('admin/maintance') ?>" class="nav-link">
               <i class="nav-icon fas fa-toolbox"></i>
               <p>
-                Maintance
+                Pemeliharaan
               </p>
             </a>
           </li>
@@ -102,7 +110,7 @@
               <i class="nav-icon fa fa-chart-pie"></i>
               <p style="font-size : 13px;">
                 Grafik Perbaikan <br> 
-                dan Maintance
+                dan Pemeliharaan
               </p>
             </a>
           </li>
@@ -137,6 +145,7 @@
               </p>
             </a>
           </li>
+          
           <li class="nav-item">
             <a href="<?= base_url('teknisi/perbaikan') ?>" class="nav-link">
               <i class="nav-icon fas fa-tools"></i>
@@ -154,6 +163,15 @@
             </a>
           </li>
           
+
+          <li class="nav-item">
+            <a href="<?= base_url('teknisi/maintance') ?>" class="nav-link">
+              <i class="nav-icon fas fa-toolbox"></i>
+              <p>
+                Pemeliharaan
+              </p>
+            </a>
+          </li>
 
         </ul>
       </nav>

@@ -49,10 +49,10 @@ include '../../templates/head.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-primary card-outline">
-                                <div class="card-header">
+                                <!-- <div class="card-header">
                                     <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
-                                    <!-- <a href="print" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a> -->
-                                </div>
+                                    <a href="print" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a>
+                                </div> -->
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <?php
@@ -72,19 +72,23 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th>No</th>
                                                     <th>Petugas </th>
+                                                    <th>username </th>
                                                     <th>E-mail</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             $no = 1;
-                                            $data = $koneksi->query("SELECT * FROM petugas ORDER BY id_petugas DESC");
+                                            $data = $koneksi->query("SELECT * FROM petugas AS p
+                                            LEFT JOIN user AS u ON p.id_user = u.id_user
+                                            ORDER BY p.id_petugas DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
                                                     <tr>
                                                         <td align="center"><?= $no++ ?></td>
                                                         <td><?= $row['nama_petugas'] ?></td>
+                                                        <td><b>ID User : <?= $row['id_user'] ?> | Username : <?= $row['username'] ?></b></td>
                                                         <td><?= $row['email'] ?></td>
                                                         <td align="center">
                                                             <a href="edit?id=<?= $row['id_petugas'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>

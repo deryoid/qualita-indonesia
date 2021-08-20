@@ -85,7 +85,7 @@ include '../../templates/head.php';
                                             LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
                                             LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
-                                            WHERE sa.status = 'Tidak Aktif' ORDER BY p.id_perbaikan DESC");
+                                            WHERE sa.status = 'Tidak Aktif' AND p.id_petugas = '$_SESSION[id_petugas]' ORDER BY p.id_perbaikan DESC");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">

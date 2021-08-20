@@ -6,9 +6,16 @@ session_start();
    $_SESSION['role'];     
 
 
-unset($_SESSION["id_user"]);
-unset($_SESSION["username"]);
-unset($_SESSION["role"]);
+if ($_SESSION['role'] == "Teknisi") {
+   unset($_SESSION['id_petugas']);  
+   unset($_SESSION["id_user"]);
+   unset($_SESSION["username"]);
+   unset($_SESSION["role"]);
+}else{
+   unset($_SESSION["id_user"]);
+   unset($_SESSION["username"]);
+   unset($_SESSION["role"]);
+}
 
 
 session_unset();
