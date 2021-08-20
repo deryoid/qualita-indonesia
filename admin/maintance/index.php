@@ -53,6 +53,7 @@ include '../../templates/head.php';
                                     <a href="tambah" class="btn bg-blue"><i class="fa fa-plus-circle"> Tambah Data</i></a>
                                     <a href="print" target="blank" class="btn bg-info"><i class="fa fa-print"> Cetak</i></a>
                                     <a href="#" data-toggle="modal" data-target="#modal_print" class="btn bg-info"><i class="fa fa-print"> Cetak Per/Petugas</i></a>
+                                    <a href="#" data-toggle="modal" data-target="#modal_printatm" class="btn bg-info"><i class="fa fa-print"> Cetak Per/Sektor ATM</i></a>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -250,6 +251,54 @@ if (isset($_GET['id'])) {
                                                     foreach ($sd as $item) {
                                                     ?>
                                                         <option value="<?= $item['nama_petugas'] ?>"><?= $item['nama_petugas'] ?></option>
+                                                        
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <input type="submit" name="print" class="btn btn-success" value="Print">
+
+                                </form>
+                                       
+                                </div>
+                            </div>                          
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- MODAL Print -->
+ <div id="modal_printatm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cetak</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+    <!-- Start content -->
+        <div class="content">
+            <div class="container"> 
+                <div class="row">
+                     <div class="col-sm-12">
+                          <div class="card-box">
+                                <form class="form-horizontal" action="printmaintanceatm" method="POST" target="blank">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-12 control-label">Pilih ATM </label>
+                                            <div class="col-sm-12">
+                                            <select class="form control select2" name="id_sektoratm" data-placeholder="Pilih" style="width: 100%;" required>
+                                                    <option value=""></option>
+                                                    <?php
+                                                    $atm = $koneksi->query("SELECT * FROM sektor_atm AS sa 
+                                                    LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang");
+                                                    foreach ($atm as $item) {
+                                                    ?>
+                                                        <option value="<?= $item['id_sektoratm'] ?>"><?= $item['kode_barang'] ?> | <?= $item['nama_barang'] ?> | <?= $item['bank'] ?></option>
                                                         
                                                     <?php } ?>
                                                 </select>

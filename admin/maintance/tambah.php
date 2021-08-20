@@ -29,13 +29,13 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Maintance ATM</h1>
+                            <h1 class="m-0 text-dark">Pemeliharaan ATM</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
                                 <!-- <li class="breadcrumb-item active">Data Master</li> -->
-                                <li class="breadcrumb-item active">Maintance ATM</li>
+                                <li class="breadcrumb-item active">Pemeliharaan ATM</li>
                                 <li class="breadcrumb-item active">Tambah Data</li>
                             </ol>
                         </div><!-- /.col -->
@@ -78,7 +78,7 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Status Maintance</label>
+                                            <label for="" class="col-sm-2 col-form-label">Status Pemeliharaan</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="status_maintance" value="Preventive Maintenance" readonly>
                                             </div>
@@ -99,7 +99,7 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="" class="col-sm-2 col-form-label">Tanggal Maintance</label>
+                                            <label for="" class="col-sm-2 col-form-label">Tanggal Pemeliharaan</label>
                                             <div class="col-sm-10">
                                                 <input type="date" class="form-control" name="tgl_maintance">
                                             </div>

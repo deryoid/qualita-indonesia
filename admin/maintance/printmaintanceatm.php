@@ -4,6 +4,11 @@ include '../../config/koneksi.php';
 
 $no = 1;
 
+$id_sektoratm   = $_POST['id_sektoratm'];
+
+$seat = $koneksi->query("SELECT * FROM sektor_atm  AS sa
+LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+WHERE sa.id_sektoratm = '$id_sektoratm'")->fetch_array();
 
 $bln = array(
     '01' => 'Januari',
@@ -36,7 +41,8 @@ $bln = array(
 <body>
 
     <p align="center"><b>
-            <font size="5">Laporan Perbaikan</font> <br>
+            <font size="5">LAPORAN PEMELIHARAAN</font> <br>
+            <font size="3">Sektor ATM : <?= $seat['kode_barang'].", ".$seat['nama_barang'].", ".$seat['bank']; ?></font> <br>
             <hr size="2px" color="black">
         </b></p>
 
@@ -47,20 +53,20 @@ $bln = array(
                 <thead class="bg-blue">
                                                 <tr align="center">
                                                     <th>No</th>
-                                                    <th>Sektor ATM</th>
+                                                    <th>Sektor Barang</th>
+                                                    <th>Status</th>
                                                     <th>Petugas</th>
-                                                    <th>Lokasi ATM</th>
-                                                    <th>Tanggal Perbaikan</th>
-                                                    <th>Status Perbaikan</th>
+                                                    <th>Tanggal Pemeliharaan</th>
+                                                    <th>Keterangan</th>
                                                 </tr>
                                             </thead>
                                             <?php
                                             $no = 1;
-                                            $data = $koneksi->query("SELECT * FROM perbaikan AS p 
-                                            LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
+                                            $data = $koneksi->query("SELECT * FROM maintance AS m
+                                            LEFT JOIN sektor_atm AS sa ON m.id_sektoratm = sa.id_sektoratm
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
-                                            LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
-                                            ORDER BY p.id_perbaikan DESC");
+                                            LEFT JOIN petugas AS p ON m.id_petugas = p.id_petugas
+                                            WHERE sa.id_sektoratm = '$id_sektoratm'");
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
@@ -68,21 +74,16 @@ $bln = array(
                                                         <td align="center"><?= $no++ ?></td>
                                                         <td>
                                                             <ul>
-                                                            <li>Kode ATM : <?= $row['kode_barang'] ?></li>
-                                                            <li>Nama ATM : <?= $row['nama_barang'] ?></li>
-                                                            <li>Tanggal Peletakan : <?= $row['tgl_peletakan'] ?></li>
-                                                            <li>Status Engine : <?= $row['status'] ?></li>
+                                                                <li>Kode Barang : <?= $row['kode_barang'] ?></li>
+                                                                <li>Lokasi Atm : <?= $row['lokasi_atm'] ?></li>
+                                                                <li>Link : <a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt">Lihat Map</a> </li>
+                                                                <li>Tanggal Peletakan :<?= $row['tgl_peletakan'] ?></li>
                                                             </ul>
-                                                        </td>
+                                                       </td>
+                                                        <td><?= $row['status_maintance'] ?></td>
                                                         <td><?= $row['nama_petugas'] ?></td>
-                                                        <td>
-                                                            <ul>
-                                                            <li><?= $row['lokasi_atm'] ?></li>
-                                                            <li><a href="<?= $row['link_gmap'] ?>" target="blank" class="fa fa-map-marked-alt"> Lihat Map</a></li>
-                                                            </ul>
-                                                        </td>
-                                                        <td><?= $row['tanggal_perbaikan'] ?></td>
-                                                        <td><?= $row['status_perbaikan'] ?></td>
+                                                        <td><?= $row['tgl_maintance'] ?></td>
+                                                        <td><?= $row['keterangan'] ?></td>
                                                     </tr>
                                                 </tbody>
                                             <?php } ?>

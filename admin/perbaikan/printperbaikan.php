@@ -62,7 +62,7 @@ $bln = array(
                                             LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
                                             LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
-                                            WHERE sa.status = 'Tidak Aktif' AND nama_petugas = '$nama_petugas'");
+                                            WHERE nama_petugas = '$nama_petugas'");
                                             $jumlah = mysqli_num_rows($data);
                                             while ($row = $data->fetch_array()) {
                                             ?>

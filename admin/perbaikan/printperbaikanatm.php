@@ -3,7 +3,11 @@ include '../../config/config.php';
 include '../../config/koneksi.php';
 
 $no = 1;
+$id_sektoratm   = $_POST['id_sektoratm'];
 
+$seat = $koneksi->query("SELECT * FROM sektor_atm  AS sa
+LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
+WHERE sa.id_sektoratm = '$id_sektoratm'")->fetch_array();
 
 $bln = array(
     '01' => 'Januari',
@@ -36,7 +40,9 @@ $bln = array(
 <body>
 
     <p align="center"><b>
-            <font size="5">Laporan Perbaikan</font> <br>
+            <font size="5">LAPORAN PERBAIKAN</font> <br>
+            <font size="3">Sektor ATM : <?= $seat['kode_barang'].", ".$seat['nama_barang'].", ".$seat['bank']; ?></font> <br>
+            
             <hr size="2px" color="black">
         </b></p>
 
@@ -60,7 +66,8 @@ $bln = array(
                                             LEFT JOIN sektor_atm AS sa ON p.id_sektoratm = sa.id_sektoratm 
                                             LEFT JOIN barang AS b ON sa.kode_barang = b.kode_barang
                                             LEFT JOIN petugas AS ps ON p.id_petugas = ps.id_petugas
-                                            ORDER BY p.id_perbaikan DESC");
+                                            WHERE sa.id_sektoratm = '$id_sektoratm'");
+                                            $jumlah = mysqli_num_rows($data);
                                             while ($row = $data->fetch_array()) {
                                             ?>
                                                 <tbody style="background-color: white">
@@ -93,7 +100,8 @@ $bln = array(
         </div>
     </div>
     <br>
-
+    <label>Jumlah Daftar Perbaikan : <?php echo "<b>".$jumlah.' Sektor'."</b>"; ?></label>
+    <br>
     </div>
 
     </div>

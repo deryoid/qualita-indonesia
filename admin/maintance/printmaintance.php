@@ -51,7 +51,7 @@ $bln = array(
                                                     <th>Sektor Barang</th>
                                                     <th>Status</th>
                                                     <th>Petugas</th>
-                                                    <th>Tanggal Maintance</th>
+                                                    <th>Tanggal Pemeliharaan</th>
                                                     <th>Keterangan</th>
                                                 </tr>
                                             </thead>
